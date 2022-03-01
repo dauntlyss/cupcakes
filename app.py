@@ -14,6 +14,11 @@ debug = DebugToolbarExtension(app)
 
 connect_db(app)
 
+@app.route('/')
+def index():
+    cupcakes = Cupcake.query.all()
+    return render_template('index.html', cupcakes=cupcakes)
+
 @app.route('/api/cupcakes')
 def list_cupcakes():
     all_cupcakes = [cupcake.serialize() for cupcake in Cupcake.query.all()]
